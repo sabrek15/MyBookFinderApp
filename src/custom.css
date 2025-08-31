@@ -1,0 +1,103 @@
+/* --- Global & Body Styles --- */
+body {
+  margin: 0;
+  padding: 40px 20px; /* Adds vertical and side padding */
+  box-sizing: border-box;
+
+  /* 
+    THIS IS THE BULLETPROOF FIX.
+    It turns the entire page into a flex container and forces its direct child 
+    (the <div id="root"> which holds our React app) to be centered.
+    This will override any other conflicting styles.
+  */
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* --- Search Bar Custom Styles --- */
+.search-form {
+  display: flex;
+  justify-content: center; /* Centers the search bar within the main area */
+  margin-bottom: 4rem;
+}
+
+.search-bar-wrapper {
+  width: 100%; /* Default width for mobile */
+  max-width: 800px; /* Sets a maximum pixel width so it doesn't get too long on huge screens */
+}
+
+/* On medium screens and up, use a percentage-based width */
+@media (min-width: 768px) {
+  .search-bar-wrapper {
+    width: 80%;
+  }
+}
+
+/* --- Customizing Bootstrap with CSS Variables --- */
+:root {
+  /* Redefine the primary theme color to a shade of purple */
+  --bs-primary: #6f42c1;
+  --bs-primary-rgb: 111, 66, 193; /* The RGB version is used for opacity in components */
+
+  /* Make the corners of components like cards and buttons more rounded */
+  --bs-border-radius: 0.5rem;
+}
+
+/* --- Helper Rules --- */
+.results-container {
+    min-height: 50vh;
+}
+
+/* --- Book Card Hover Overlay --- */
+.card {
+  /* This is crucial: It makes the card a positioning container for the overlay */
+  position: relative;
+  overflow: hidden; /* Hides anything that might stick out of the rounded corners */
+}
+
+.book-card-overlay {
+  /* Position the overlay to cover the entire card */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Styling */
+  background-color: rgba(28, 32, 36, 0.9); /* Semi-transparent dark background */
+  color: white;
+  
+  /* Use flexbox to center the content inside the overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  /* Animation: Hide it by default and set up a smooth transition */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* This class is added by React when isHovered is true */
+.book-card-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay-content {
+  padding: 1rem;
+}
+
+.overlay-content h5 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding-bottom: 0.5rem;
+}
+
+.overlay-content p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
